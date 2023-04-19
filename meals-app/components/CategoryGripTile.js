@@ -6,7 +6,11 @@ import {
   Platform,
 } from "react-native";
 
+import {useNavigation} from "@react-navigation/native"
+
 function CategoryGripTile({ title, color, onPress }) {
+  // navigating from inside a component that is not registered as a screen its self
+  const navigation = useNavigation()
   return (
     <View style={[styles.gridItem, {backgroundColor: color}]}>
       <TouchableHighlight

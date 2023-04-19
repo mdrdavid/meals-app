@@ -10,7 +10,9 @@ import CategoryGripTile from "../components/CategoryGripTile";
 function CategoriesScreen({ navigation }) {
   function renderCategoryItem(itemData) {
     function pressHandler() {
-      navigation.navigate("MealsOverview");
+      navigation.navigate("MealsOverview", {
+        categoryId: itemData.item.id // pass the category id from params to the mealsOverviewScreen
+      });
     }
     return (
       <CategoryGripTile
