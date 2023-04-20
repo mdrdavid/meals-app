@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import AdminProductsScreen from "./screens/AdminProductsScreen";
+import AdminSubscriptionsScreen from "./screens/AdminSubscriptions";
+import AdminServicesScreen from "./screens/AdminServicesScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,10 +17,22 @@ export default function App() {
       <StatusBar styles="light" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="MealsCategories" component={CategoriesScreen} />
-          <Stack.Screen name="MealsOverview" component={MealsOverviewScreen} />
+          <Stack.Screen
+            name="AdminProductsScreen"
+            component={AdminProductsScreen}
+            options={{ title: "Admin Products" }}
+          />
+          <Stack.Screen
+            name="AdminServicesScreen"
+            component={AdminServicesScreen}
+            options={{ title: "Admin Services" }}
+          />
+          <Stack.Screen
+            name="AdminSubscriptions"
+            component={AdminSubscriptionsScreen}
+            options={{ title: "Admin Subscriptions" }}
+          />
         </Stack.Navigator>
-        {/* <CategoriesScreen /> */}
       </NavigationContainer>
     </>
   );
