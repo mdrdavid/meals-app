@@ -9,6 +9,7 @@ const AdminProductsScreen = () => {
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
   const [productPrice, setProductPrice] = useState("");
+  const [productImage, setProductImage] = useState(null);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -81,6 +82,10 @@ const AdminProductsScreen = () => {
 
   return (
     <View style={styles.container}>
+       <ImagePickerButton
+        title="Select Product Image"
+        onSelectImage={setProductImage}
+      />
       <TextInput
         style={styles.input}
         placeholder="Product name"
@@ -101,6 +106,7 @@ const AdminProductsScreen = () => {
         renderItem={renderProductItem}
         keyExtractor={(item) => item.id}
       />
+      <ImagePickerButton title="Select Image" onSelectImage={(imageUri) => console.log("Selected image:", imageUri)} />
       <Button
         title="Save Products"
         onPress={saveProducts}
