@@ -6,8 +6,19 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import {useNavigation} from "@react-navigation/native"
 
-function MealItem({ title, imageUrl, duration, complexity, affordability }) {
+function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
+  const navigation = useNavigation();
+// navigating to the meals detail screen using useNavigation hook since this meals item 
+//is a component not a screen so can not access navigation or route from react navigation
+
+function selectMealHandler(){
+  navigation.navigate("MealDetailsScreen", {
+    mealId: id
+  })
+}
+  
   return (
     <View style={styles.mealItem}>
       <View style={styles.innerContainer}>
@@ -15,7 +26,7 @@ function MealItem({ title, imageUrl, duration, complexity, affordability }) {
           android_ripple={(color = "#ccc")}
           activeOpacity={0.6}
           underlayColor="#DDDDDD"
-          onPress={() => alert("Pressed!")}
+          onPress={selectMealHandler}
         >
           <View>
             <Image source={{ uri: imageUrl }} style={styles.image} />

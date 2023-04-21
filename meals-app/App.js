@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import MealsDetailsScreen from "./screens/MealsDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -37,9 +38,17 @@ export default function App() {
             //     title: categoryId,
             //   };
             // }} // setting header options dynamically
-            
+
             options={{
               headerStyle: { backgroundColor: "#48d1cc" },
+            }}
+          />
+          <Stack.Screen
+            name="MealDetailsScreen"
+            component={MealsDetailsScreen}
+            options={{
+              title: "Meal Detail",
+              headerStyle: { backgroundColor: "#afeeee" },
             }}
           />
         </Stack.Navigator>
