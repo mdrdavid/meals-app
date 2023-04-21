@@ -6,19 +6,27 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import {useNavigation} from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
+import MealDetail from "./MealDetails";
 
-function MealItem({ id, title, imageUrl, duration, complexity, affordability }) {
+function MealItem({
+  id,
+  title,
+  imageUrl,
+  duration,
+  complexity,
+  affordability,
+}) {
   const navigation = useNavigation();
-// navigating to the meals detail screen using useNavigation hook since this meals item 
-//is a component not a screen so can not access navigation or route from react navigation
+  // navigating to the meals detail screen using useNavigation hook since this meals item
+  //is a component not a screen so can not access navigation or route from react navigation
 
-function selectMealHandler(){
-  navigation.navigate("MealDetailsScreen", {
-    mealId: id
-  })
-}
-  
+  function selectMealHandler() {
+    navigation.navigate("MealDetailsScreen", {
+      mealId: id,
+    });
+  }
+
   return (
     <View style={styles.mealItem}>
       <View style={styles.innerContainer}>
@@ -33,11 +41,16 @@ function selectMealHandler(){
             <Text style={styles.title}>{title}</Text>
           </View>
         </TouchableHighlight>
-        <View style={styles.details}>
+        {/* <View style={styles.details}>
           <Text style={styles.detailItem}>{duration} minutes</Text>
           <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
           <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-        </View>
+        </View> */}
+        <MealDetail
+          duration={duration}
+          complexity={complexity}
+          affordability={affordability}
+        />
       </View>
     </View>
   );
@@ -72,15 +85,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     margin: 8,
-  },
-  details: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
   },
 });
