@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Button, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -49,6 +49,9 @@ export default function App() {
             options={{
               title: "Meal Detail",
               headerStyle: { backgroundColor: "#afeeee" },
+              // headerRight:()=>{
+              //   return <Button title="Tap Me" onPress={()=> alert("Pressed")}/>
+              // }
             }}
           />
         </Stack.Navigator>

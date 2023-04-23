@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
+import React, { useLayoutEffect } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Button,
+} from "react-native";
 
 import { MEALS } from "../data/dummy-data";
 import MealDetail from "../components/MealDetails";
@@ -10,6 +17,17 @@ function MealsDetailsScreen({ route, navigation }) {
   // route give access to the params set in the meal details screen
   const mealId = route.params.mealId;
 
+  function headerButtonPressHandler() {
+    alert("pressed");
+  }
+  // ad and set button to header
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <Button title="Tap Me" onPress={headerButtonPressHandler} />;
+      },
+    });
+  }, [navigation, headerButtonPressHandler]);
   // select a meal
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return (
