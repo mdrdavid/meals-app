@@ -1,13 +1,37 @@
-import { StatusBar } from "expo-status-bar";
+import { StatusBar } from "react-native";
 import { StyleSheet, Button, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealsDetailsScreen from "./screens/MealsDetailsScreen";
+import FavoriteScreen from "./screens/FavoriteScreen";
 
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "#351401" }, // set the color of the header
+        headerTintColor: "white", // set the color of the header title
+        sceneContainerStyle: { backgroundColor: "#3f2f25" }, // set styles for the main screen
+      }}
+    >
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{
+          title: "All Categories",
+        }}
+      />
+      <Drawer.Screen name="Favorites" component={FavoriteScreen} />
+    </Drawer.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -22,11 +46,13 @@ export default function App() {
             contentStyle: { backgroundColor: "#3f2f25" }, // set styles for the main screen
           }}
         >
+          {/* Drawer navigation nested in Stack navigation */}
           <Stack.Screen
             name="MealsCategories"
-            component={CategoriesScreen}
+            component={DrawerNavigator}
             options={{
-              title: "Meals Categories",
+              // title: "Meals Categories",
+              headerShown: false, // remove the stack navigation header when on drawer navigation
             }}
           />
           <Stack.Screen
