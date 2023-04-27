@@ -2,10 +2,13 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Button, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 
 import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealsDetailsScreen from "./screens/MealsDetailsScreen";
+import FavoritesScreen from "./screens/FavoritesScreen";
+import FavoriteContextProvider from "./store/context/Favarites-context";
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +16,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
+      <FavoriteContextProvider>
       <NavigationContainer>
         {/* set default screen options that will appear on all screens */}
         <Stack.Navigator
@@ -48,14 +52,26 @@ export default function App() {
             component={MealsDetailsScreen}
             options={{
               title: "Meal Detail",
-              headerStyle: { backgroundColor: "#afeeee" },
+              headerStyle: { backgroundColor: "#afeee9" },
               // headerRight:()=>{
               //   return <Button title="Tap Me" onPress={()=> alert("Pressed")}/>
               // }
             }}
           />
+          <Stack.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
+          title: "Favorites",
+          headerStyle: { backgroundColor: "#afeeee" },
+          // drawerIcon: ({ color, size }) => (
+          //   <Ionicons name="star" color={color} size={size} />
+          // ),
+        }}
+      />
         </Stack.Navigator>
       </NavigationContainer>
+      </FavoriteContextProvider>
     </>
   );
 }
