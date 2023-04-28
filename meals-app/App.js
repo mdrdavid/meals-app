@@ -8,6 +8,7 @@ import CategoriesScreen from "./screens/CategoriesScreen";
 import MealsOverviewScreen from "./screens/MealsOverviewScreen";
 import MealsDetailsScreen from "./screens/MealsDetailsScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
+// import FavoriteContextProvider from "../store/context/favarites-context";
 import FavoriteContextProvider from "./store/context/Favarites-context";
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavoriteContextProvider>
+      {/* <FavoriteContextProvider> */}
       <NavigationContainer>
         {/* set default screen options that will appear on all screens */}
         <Stack.Navigator
@@ -71,7 +72,7 @@ export default function App() {
       />
         </Stack.Navigator>
       </NavigationContainer>
-      </FavoriteContextProvider>
+      {/* </FavoriteContextProvider> */}
     </>
   );
 }
