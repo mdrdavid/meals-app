@@ -1,4 +1,5 @@
 import React, { useContext, useLayoutEffect } from "react";
+
 import {
   View,
   Text,
@@ -7,28 +8,38 @@ import {
   ScrollView,
   Button,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
 import MealDetail from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
-import { FavoriteContext } from "../store/context/Favarites-context";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
+// import { FavoriteContext } from "../store/context/Favarites-context";
 
 function MealsDetailsScreen({ route, navigation }) {
-  const favoriteMealsContext = useContext(FavoriteContext);
+  // const favoriteMealsContext = useContext(FavoriteContext);
+
+  // get data out of the redux store
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
+  // dispatching redux actions
+  const dispatch = useDispatch();
   // route give access to the params set in the meal details screen
   const mealId = route.params.mealId;
 
   // check if a meal is favorite
-  const isMealFavorite = favoriteMealsContext.ids.includes(mealId);
+  // const isMealFavorite = favoriteMealsContext.ids.includes(mealId);
+  const isMealFavorite = favoriteMealIds.includes(mealId);
 
   function changeFavoriteStatusHandler() {
     // make meal unfavorite
     if (isMealFavorite) {
-      favoriteMealsContext.removeFavorite(mealId);
+      // favoriteMealsContext.removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId })); // create an action which is dispatched by redux
     } else {
-      favoriteMealsContext.addFavorite(mealId);
+      // favoriteMealsContext.addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
     }
     alert("pressed");
     navigation.navigate("Favorites");
