@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import {
   View,
   Text,
@@ -13,13 +13,25 @@ import MealDetail from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
 import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
+import { FavoriteContext } from "../store/context/Favarites-context";
 
 function MealsDetailsScreen({ route, navigation }) {
+  const favoriteMealsContext = useContext(FavoriteContext);
   // route give access to the params set in the meal details screen
   const mealId = route.params.mealId;
 
-  function headerButtonPressHandler() {
+  // check if a meal is favorite
+  const isMealFavorite = favoriteMealsContext.ids.includes(mealId);
+
+  function changeFavoriteStatusHandler() {
+    // make meal unfavorite
+    if (isMealFavorite) {
+      favoriteMealsContext.removeFavorite(mealId);
+    } else {
+      favoriteMealsContext.addFavorite(mealId);
+    }
     alert("pressed");
+    navigation.navigate("Favorites");
   }
   // ad and set button to header
   useLayoutEffect(() => {
@@ -28,14 +40,14 @@ function MealsDetailsScreen({ route, navigation }) {
         // return <Button title="Tap Me" onPress={headerButtonPressHandler} />;
         return (
           <IconButton
-            onPress={headerButtonPressHandler}
-            icon="star"
+            onPress={changeFavoriteStatusHandler}
+            icon={isMealFavorite ? "start" : "start-outline"}
             color="white"
           />
         );
       },
     });
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoriteStatusHandler]);
   // select a meal
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
   return (
